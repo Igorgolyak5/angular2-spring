@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 md-offset-3">
+            <form class="form-signin" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+
+                <h2 class="form-signin-heading">Sign in</h2>
+
+                <label for="username" class="sr-only">Email address</label>
+                <input type="text" id="username" name="username" [(ngModel)]="model.username" #username="ngModel"  class="form-control" placeholder="Email address" required="true" autofocus="true" />
+
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" [(ngModel)]="model.password" #password="ngModel" class="form-control" placeholder="Password" required="true" />
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>

@@ -1,0 +1,24 @@
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item" [hasPermission]="['ADMIN', 'ADOPS']">
+            <span>
+                <a class="nav-link" [routerLink]="['/publishers']">Publishers</a>
+            </span>
+        </li>
+        <li class="nav-item" [hasPermission]="['ADOPS', 'PUBLISHER']">
+            <span>
+                <a class="nav-link" [routerLink]="['/application']">Applications</a>
+            </span>
+        </li>
+        <li class="nav-item" [hasPermission]="['ADMIN']">
+            <span>
+                <a class="nav-link" [routerLink]="['/operators']" >Operators</a>
+            </span>
+        </li>
+        <li class="nav-item">
+            <span>
+                <a class="nav-link" href="login" (click)="logout()">Logout</a>
+            </span>
+        </li>
+    </ul>
+</nav>

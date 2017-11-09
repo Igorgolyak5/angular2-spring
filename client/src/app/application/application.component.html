@@ -1,0 +1,97 @@
+<left-menu></left-menu>
+<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+    <h2><button type="button" class="btn btn-success" id="u-create-btn" (click)="createModalShow()">Create</button></h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Publisher</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Content Types</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let app of getAll()">
+            <tr>
+                <td>{{app.id}}</td>
+                <td>{{app.user ? app.user.name : ''}}</td>
+                <td>{{app.name}}</td>
+                <td>{{app.type}}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let contentType of app.contentTypes">{{contentType}}</li>
+                    </ul>
+                </td>
+                <td><button type="button" class="btn btn-warning edit-app" (click)="editModalShow(app)">Edit</button></td>
+                <td><button type="button" class="btn btn-danger delete-app" (click)="delete(app.id)">Delete</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<modal #editAppModal>
+    <div class="modal-header">
+        Edit application
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="app-id"> ID: </label>
+                <input type="text" class="form-control" id="app-id" placeholder="Application ID" disabled="true"  [(ngModel)]="model.id"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="app-name"> Name: </label>
+                <input type="text" class="form-control" id="app-name" placeholder="Application Name" required="true" [(ngModel)]="model.name"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> App type: </label>
+                <select-loader url="/applications/types/" [(bindModelData)]="model.type"></select-loader>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Content types: </label>
+                <select-loader url="/applications/content-types/" [(bindModelData)]="model.contentTypes" [(isMultiple)]="multiple"></select-loader>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Publisher: </label>
+                <input type="text" class="form-controler" disabled="true"/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="editAppModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="update(model)">Save changes</button>
+    </div>
+</modal>
+<modal #createAppModal>
+    <div class="modal-header">
+        Creae application
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label> Name: </label>
+                <input type="text" class="form-control" placeholder="Application Name" required="true" [(ngModel)]="newModel.name"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> App type: </label>
+                <select-loader url="/applications/types/" [(bindModelData)]="newModel.type"></select-loader>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Content types: </label>
+                <select-loader url="/applications/content-types/" [(bindModelData)]="newModel.contentTypes" [(isMultiple)]="multiple"></select-loader>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Publisher: </label>
+                <select-loader url="/publishers/free/" [(bindModelData)]="newModel.user.email" #freePublishers></select-loader>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="createAppModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="create(newModel)">Save changes</button>
+    </div>
+</modal>

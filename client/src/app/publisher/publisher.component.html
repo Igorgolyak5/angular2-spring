@@ -1,0 +1,82 @@
+<left-menu></left-menu>
+<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+    <h2><button type="button" class="btn btn-success" id="u-create-btn" (click)="createModalShow()">Create</button></h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let publisher of publishers">
+            <tr>
+                <td>{{publisher.id}}</td>
+                <td>{{publisher.name}}</td>
+                <td>{{publisher.email}}</td>
+                <td><button type="button" class="btn btn-warning edit-user"  (click)="editModalShow(publisher)">Edit</button></td>
+                <td><button type="button" class="btn btn-danger delete-user" (click)="delete(publisher.id)">Delete</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+<modal #editUserModal>
+    <div class="modal-header">
+        Edit user
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="a-id"> ID: </label>
+                <input type="text" class="form-control" id="a-id" placeholder="ID" disabled="true"  [(ngModel)]="model.id"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="operator-name"> Name: </label>
+                <input type="text" class="form-control" id="operator-name" placeholder="Name" required="true" [(ngModel)]="model.name"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="operator-email"> Email: </label>
+                <input type="email" class="form-control" id="operator-email" placeholder="Email" required="true" [(ngModel)]="model.email"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="operator-password"> Password: </label>
+                <input type="text" class="form-control" id="operator-password" placeholder="Password" required="true" [(ngModel)]="model.password"/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="editUserModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="update(model)">Save changes</button>
+    </div>
+</modal>
+<modal #createUserModal>
+    <div class="modal-header">
+        Create user
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-9">
+                <label for="new-operator-name"> Name: </label>
+                <input type="text" class="form-control" id="new-operator-name" placeholder="Name" required="true" [(ngModel)]="model.name"/>
+            </div>
+            <div class="form-group col-md-9">
+                <label for="new-operator-email"> Email: </label>
+                <input type="email" class="form-control" id="new-operator-email" placeholder="Email" required="true" [(ngModel)]="model.email"/>
+            </div>
+            <div class="form-group col-md-9">
+                <label for="new-operator-password"> Password: </label>
+                <input type="text" class="form-control" id="new-operator-password" placeholder="Password" required="true" [(ngModel)]="model.password"/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="createUserModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="create(model)">Save changes</button>
+    </div>
+</modal>
