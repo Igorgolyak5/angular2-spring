@@ -17,7 +17,8 @@ pipeline {
         stage('Build image') {
             steps {
                script {
-                    docker.build "localhost:5000/angular2-spring:0.1"
+                    def image = docker.build "localhost:5000/angular2-spring:0.1"
+                    image.push()
                }
             }
         }
