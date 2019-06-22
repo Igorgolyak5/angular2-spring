@@ -4,6 +4,6 @@ node('docker') {
         checkout scm
     }
     stage ('Build & UnitTest') {
-        mvn test
+        sh "mvn test"
     }
 }
