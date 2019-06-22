@@ -4,9 +4,21 @@ pipeline {
         jdk 'jdk8'
     }
     stages {
-        stage('Install') {
+        stage('Test') {
             steps {
                 sh "mvn clean test"
+            }
+        }
+        stage('Build') {
+            steps {
+               sh "mvn clean package"
+            }
+        }
+        stage('Build image') {
+            steps {
+               script {
+                    docker.build "localhost:5000/angular2-spring:0.1"
+               }
             }
         }
     }
