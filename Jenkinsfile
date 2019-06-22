@@ -1,11 +1,7 @@
-pipeline {
-    agent any
+node('docker') {
 
-    stages {
-        stage('Test') {
-            steps {
-                mvn test
-            }
-        }
-    }
+    stage 'Checkout'
+        checkout scm
+    stage 'Build & UnitTest'
+        mvn test
 }
