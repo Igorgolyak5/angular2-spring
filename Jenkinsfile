@@ -1,7 +1,9 @@
 node('docker') {
 
-    stage 'Checkout'
+    stage ('Checkout') {
         checkout scm
-    stage 'Build & UnitTest'
+    }
+    stage ('Build & UnitTest') {
         mvn test
+    }
 }
